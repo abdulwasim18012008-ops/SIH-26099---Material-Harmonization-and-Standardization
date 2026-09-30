@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #faf6f0;
+  --color-primary: #4a7c59;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #78a886;
+  --color-on-primary-container: #d8f0de;
+  --color-primary-fixed: #c8e8d0;
+  --color-primary-fixed-dim: #8ecf9e;
+  --color-on-primary-fixed: #002110;
+  --color-on-primary-fixed-variant: #2a6038;
+  
+  --color-secondary: #6b6358;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #f0e8db;
+  --color-on-secondary-container: #5e5548;
+  --color-secondary-fixed: #f0e8db;
+  --color-secondary-fixed-dim: #d4ccbf;
+  --color-on-secondary-fixed: #1e1a13;
+  --color-on-secondary-fixed-variant: #4a4538;
+  
+  --color-tertiary: #705c30;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #c4a66a;
+  --color-on-tertiary-container: #554020;
+  --color-tertiary-fixed: #f8e0a8;
+  --color-tertiary-fixed-dim: #dcc48e;
+  --color-on-tertiary-fixed: #221a05;
+  --color-on-tertiary-fixed-variant: #554020;
+  
+  --color-error: #b83230;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad8;
+  --color-on-error-container: #690005;
+  
+  --color-background: #f7ece9;
+  --color-on-background: #2e3230;
+  --color-surface-dim: #dbd7cf;
+  --color-surface-bright: #faf6f0;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f1ea;
+  --color-surface-container: #f0ece4;
+  --color-surface-container-high: #eae6de;
+  --color-surface-container-highest: #e4e0d8;
+  --color-surface-variant: #e4e0d8;
+  --color-on-surface: #2e3230;
+  --color-on-surface-variant: #4a4e4a;
+  --color-outline: #74796e;
+  --color-outline-variant: #c4c8bc;
+  --color-inverse-surface: #2e3230;
+  --color-inverse-on-surface: #f5f0e8;
+  --color-inverse-primary: #8ecf9e;
+  --color-surface-tint: #4a7c59;
+
+  /* Custom Theme Maroon/Cream Accents */
+  --color-pipeline-maroon: #a5555a;
+  --color-pipeline-cream: #f7ece9;
+
+  --font-headline: "Literata", serif;
+  --font-display: "Literata", serif;
+  --font-body: "Nunito Sans", sans-serif;
+  --font-label: "Nunito Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #0b0720;
+    color: #2e3230;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+}
+
+/* Material Symbols font configuration */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Clean scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4c8bc;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #74796e;
+}
+
+/* ========================================================
+   ANIMATED DATA PIPELINE BACKGROUND KEYFRAMES (GPU ACCELERATED)
+   ======================================================== */
+
+/* 1. Large faint dot-grid panning via background-position */
+@keyframes panDotGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 48px 48px;
+  }
+}
+
+.animate-pan-dot-grid {
+  animation: panDotGrid 22s linear infinite;
+  will-change: background-position;
+}
+
+/* 2. Soft Blurred Gradient Maroon/Rose Shapes (8-12s duration, ease-in-out) */
+@keyframes flowOrb1 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(80px, 60px) scale(1.12);
+  }
+  66% {
+    transform: translate(-30px, 45px) scale(0.92);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes flowOrb2 {
+  0% {
+    transform: translate(0px, 0px) scale(1.05);
+  }
+  40% {
+    transform: translate(-90px, 70px) scale(0.9);
+  }
+  75% {
+    transform: translate(-40px, -45px) scale(1.15);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1.05);
+  }
+}
+
+@keyframes flowOrb3 {
+  0% {
+    transform: translate(0px, 0px) scale(0.95);
+  }
+  50% {
+    transform: translate(100px, -65px) scale(1.16);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(0.95);
+  }
+}
+
+@keyframes flowOrb4 {
+  0% {
+    transform: translate(0px, 0px) scale(1.1);
+  }
+  45% {
+    transform: translate(-70px, -50px) scale(0.94);
+  }
+  80% {
+    transform: translate(50px, 35px) scale(1.08);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1.1);
+  }
+}
+
+.animate-flow-orb-1 {
+  animation: flowOrb1 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-flow-orb-2 {
+  animation: flowOrb2 11s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-flow-orb-3 {
+  animation: flowOrb3 8.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-flow-orb-4 {
+  animation: flowOrb4 10.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* 3. Thin Streaming Data Lines (translateX + opacity fade in/out) */
+@keyframes streamLineHorizontal {
+  0% {
+    transform: translateX(-30vw);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.24;
+  }
+  80% {
+    opacity: 0.20;
+  }
+  100% {
+    transform: translateX(115vw);
+    opacity: 0;
+  }
+}
+
+.animate-stream-line {
+  animation-name: streamLineHorizontal;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}

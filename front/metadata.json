@@ -1,0 +1,6 @@
+{
+  "name": "CPSE Material Harmonization Portal",
+  "description": "National CPSE Material Harmonization Portal for Ministry of Heavy Industries: AI vector engine ingestion, inter-CPSE consensus adjudication, and standardized master catalog analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

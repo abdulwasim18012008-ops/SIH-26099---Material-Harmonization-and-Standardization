@@ -1,0 +1,23 @@
+[
+  {
+    "cpse_id": 1,
+    "material_code": "CP-4001",
+    "original_description": "STAINLESS STEEL PIPE 25MM",
+    "original_specifications": "SS304",
+    "original_unit": "MTR"
+  },
+  {
+    "cpse_id": 1,
+    "material_code": "CP-4002",
+    "original_description": "CARBON STEEL FLANGE 50MM",
+    "original_specifications": "CS",
+    "original_unit": "NOS"
+  },
+  {
+    "cpse_id": 1,
+    "material_code": "CP-4003",
+    "original_description": "SS ELBOW 25MM",
+    "original_specifications": "SS316",
+    "original_unit": "NOS"
+  }
+]
