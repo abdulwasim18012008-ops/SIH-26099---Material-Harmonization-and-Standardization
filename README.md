@@ -1,4 +1,4 @@
-# SIH-26099 — AI-Driven Material Harmonization and Standardization
+# SIH-26099 — AI Driven Material Harmonization and Standardization
 
 ## Smart India Hackathon 2026
 
