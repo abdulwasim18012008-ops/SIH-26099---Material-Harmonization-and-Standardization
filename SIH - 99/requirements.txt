@@ -5,5 +5,3 @@ pandas
 numpy
 openpyxl
 scikit-learn
-faiss-cpu
-sentence-transformers
