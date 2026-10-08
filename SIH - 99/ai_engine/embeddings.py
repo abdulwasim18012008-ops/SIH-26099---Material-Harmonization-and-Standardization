@@ -8,7 +8,7 @@ class MaterialEmbeddingModel:
         self.model = None
 
     def _load_model(self):
-        if self.model is None:
+        if self.model is None: 
             print("Loading embedding model...")
             
             self.model = SentenceTransformer(
