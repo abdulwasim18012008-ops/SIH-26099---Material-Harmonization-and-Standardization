@@ -1,30 +1,32 @@
-from sentence_transformers import SentenceTransformer
+import numpy as np
+from sklearn.feature_extraction.text import HashingVectorizer
 
 
 class MaterialEmbeddingModel:
 
     def __init__(self):
-        print("Initializing embedding model...")
-        self.model = None
+        print("Initializing lightweight embedding model...")
 
-    def _load_model(self):
-        if self.model is None: 
-            print("Loading embedding model...")
-            
-            self.model = SentenceTransformer(
-                "all-MiniLM-L6-v2",
-                device="cpu"
-            )
+        self.vectorizer = HashingVectorizer(
+            n_features=384,
+            analyzer="char_wb",
+            ngram_range=(3, 5),
+            norm="l2",
+            alternate_sign=False
+        )
 
-            print("Embedding model loaded.")
+        print("Lightweight embedding model ready.")
 
     def encode(self, text: str):
 
-        self._load_model()
+        if not text:
+            text = ""
 
-        embedding = self.model.encode(
-            text,
-            normalize_embeddings=True
+        embedding = self.vectorizer.transform(
+            [str(text)]
+        ).toarray()[0]
+
+        return np.asarray(
+            embedding,
+            dtype="float32"
         )
-
-        return embedding
