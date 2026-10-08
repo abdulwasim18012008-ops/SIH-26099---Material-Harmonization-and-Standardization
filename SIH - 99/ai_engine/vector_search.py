@@ -1,5 +1,4 @@
 import numpy as np
-import faiss
 
 
 class MaterialVectorSearch:
@@ -7,13 +6,13 @@ class MaterialVectorSearch:
     def __init__(self, embedding_model):
         self.embedding_model = embedding_model
         self.materials = []
-        self.index = None
+        self.embeddings = None
 
     def add_materials(self, materials):
         """
-        Add material records to the vector index.
+        Add material records to the vector search.
 
-        Each material should be a dictionary containing at least:
+        Each material should contain:
 
         {
             "material_id": "...",
@@ -30,71 +29,82 @@ class MaterialVectorSearch:
 
         for material in materials:
 
-            description = material.get("description", "")
+            description = material.get(
+                "description",
+                ""
+            )
 
-            embedding = self.embedding_model.encode(description)
+            embedding = self.embedding_model.encode(
+                description
+            )
 
             embeddings.append(embedding)
 
-        embeddings = np.array(
+        self.embeddings = np.asarray(
             embeddings,
             dtype="float32"
         )
-
-        dimension = embeddings.shape[1]
-
-        # Inner Product + normalized embeddings
-        # = cosine similarity
-        self.index = faiss.IndexFlatIP(dimension)
-
-        self.index.add(embeddings)
 
         self.materials = materials
 
     def search(self, query, top_k=5):
         """
-        Search the material database using semantic similarity.
+        Search materials using cosine similarity.
         """
 
-        if self.index is None:
+        if self.embeddings is None:
             return []
 
-        query_embedding = self.embedding_model.encode(query)
+        query_embedding = self.embedding_model.encode(
+            query
+        )
 
-        query_embedding = np.array(
-            [query_embedding],
+        query_embedding = np.asarray(
+            query_embedding,
             dtype="float32"
         )
+
+        # Embeddings are already normalized,
+        # so dot product gives cosine similarity.
+        scores = self.embeddings @ query_embedding
 
         number_of_results = min(
             top_k,
             len(self.materials)
         )
 
-        scores, indices = self.index.search(
-            query_embedding,
-            number_of_results
-        )
+        if number_of_results == 0:
+            return []
+
+        top_indices = np.argsort(
+            scores
+        )[::-1][:number_of_results]
 
         results = []
 
-        for score, index in zip(
-            scores[0],
-            indices[0]
-        ):
+        for index in top_indices:
 
-            if index < 0:
-                continue
-
-            material = self.materials[index]
+            material = self.materials[int(index)]
 
             results.append({
-                "material_id": material.get("material_id"),
-                "cpse": material.get("cpse"),
-                "original_code": material.get("original_code"),
-                "description": material.get("description"),
+                "material_id": material.get(
+                    "material_id"
+                ),
+
+                "cpse": material.get(
+                    "cpse"
+                ),
+
+                "original_code": material.get(
+                    "original_code"
+                ),
+
+                "description": material.get(
+                    "description"
+                ),
+
                 "similarity": round(
-                    float(score),
+                    float(scores[index]),
                     4
                 )
             })
